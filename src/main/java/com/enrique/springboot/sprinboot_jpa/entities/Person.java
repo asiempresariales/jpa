@@ -1,5 +1,9 @@
 package com.enrique.springboot.sprinboot_jpa.entities;
 
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +13,24 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "estudiante")
 public class Person {
+
+    
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private String nombre;
+    private String apellido1;
+    private String apellido2;
+    private String telefono;
+    private String mail;
+    private int grupo;
+
+    @Embedded
+    private Audit audit = new Audit();
+
 
     public Person() {
     }
@@ -25,17 +47,7 @@ public class Person {
         this.grupo = grupo;
     }
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    private String nombre;
-    private String apellido1;
-    private String apellido2;
-    private String telefono;
-    private String mail;
-    private int grupo;
+   
 
     public int getId() {
         return id;
@@ -84,7 +96,7 @@ public class Person {
     @Override
     public String toString() {
         return " [id=" + id + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2
-                + ", telefono=" + telefono + ", email=" + mail + ", grupo=" + grupo + "]";
+                + ", telefono=" + telefono + ", email=" + mail + ", grupo=" + grupo + " create" + audit.getCreateAt() + " updated " + audit.getUpdateAt() + "]";
     }
 
     
